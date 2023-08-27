@@ -61,4 +61,98 @@ export class PostgresAccountRepository implements IAccountRepository {
             throw new Error('An error occurred while fetching the account.');
         }
     }
+
+    async deposit(id: string, amount: number): Promise<void> {
+        try {
+            const account = await prisma.account.findUnique({
+                where: {
+                    id: id
+                }
+            });
+            if (!account) {
+                throw new Error('Account not found.');
+            }
+            await prisma.account.update({
+                where: {
+                    id: id
+                },
+                data: {
+                    balance: account.balance + amount
+                }
+            });
+        } catch (err) {
+            throw new Error('An error occurred while fetching the account.');
+        }
+    }
+
+    async withdraw(id: string, amount: number): Promise<void> {
+        try {
+            const account = await prisma.account.findUnique({
+                where: {
+                    id: id
+                }
+            });
+            if (!account) {
+                throw new Error('Account not found.');
+            }
+            if (account.balance < amount) {
+                throw new Error('Insufficient funds.');
+            }
+            await prisma.account.update({
+                where: {
+                    id: id
+                },
+                data: {
+                    balance: account.balance - amount
+                }
+            });
+        } catch (err) {
+            throw new Error('An error occurred while fetching the account.');
+        }
+    }
+
+    async transfer(id: string, amount: number, idDestinationAccount: string): Promise<void> {
+        try {
+            const account = await prisma.account.findUnique({
+                where: {
+                    id: id
+                }
+            });
+            if (!account) {
+                throw new Error('Account not found.');
+            }
+            if (account.balance < amount) {
+                throw new Error('Insufficient funds.');
+            }
+
+            const accountDestination = await prisma.account.findUnique({
+                where: {
+                    id: idDestinationAccount
+                }
+            });
+            if (!accountDestination) {
+                throw new Error('Account not found.');
+            }
+
+            await prisma.account.update({
+                where: {
+                    id: id
+                },
+                data: {
+                    balance: account.balance - amount
+                }
+            });
+
+            await prisma.account.update({
+                where: {
+                    id: idDestinationAccount
+                },
+                data: {
+                    balance: accountDestination.balance + amount
+                }
+            });
+        } catch (err) {
+            throw new Error('An error occurred while fetching the account.');
+        }
+    }
 }

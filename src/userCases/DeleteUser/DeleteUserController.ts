@@ -1,23 +1,24 @@
 import { Request, Response } from "express";
-import { GetAccountUseCase } from "./GetAccountUseCase";
-import { error } from "console";
+import { DeleteUserUseCase } from "./DeleteUserUseCase";
 
 
-
-export class GetAccountController {
+export class DeleteUserController {
     constructor(
-        private getAccountUseCase: GetAccountUseCase,
+        private deleteUserUseCase: DeleteUserUseCase,
     ) { }
+
     async handle(request: Request, response: Response): Promise<Response> {
         const { id } = request.params;
+
         try {
-            const account = await this.getAccountUseCase.execute({ id });
-            return response.status(200).json(account);
+            await this.deleteUserUseCase.execute({
+                id
+            });
+            return response.status(201).send();
         } catch (error) {
             return response.status(400).json({
                 message: error || 'Unexpected error.'
             })
         }
     }
-
 }

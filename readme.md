@@ -61,6 +61,139 @@ Este projeto serve como um exemplo de como construir uma API de banco digital se
 
 Essa estrutura enfatiza a separação das responsabilidades e a organização por casos de uso, o que torna o projeto mais escalável e fácil de manter. Os "use cases" são classes que encapsulam a lógica de negócios específica para cada cenário, enquanto as "entities" representam as estruturas de dados do seu domínio. Isso facilita a adição de novos casos de uso ou alterações futuras sem afetar outras partes do sistema.
 
+Claro, aqui está a reorganização das rotas do seu projeto "MyBank API Rest" para o README do seu repositório:
+
+## Rotas da API
+
+### Contas Bancárias
+
+**Criar Conta Bancária**
+```http
+POST /account/create
+```
+Exemplo de requisição:
+```json
+{
+    "accountNumber": "123456",
+    "balance": 1000,
+    "accountType": "Conta Corrente",
+    "agency": "0001",
+    "bankNumber": "001",
+    "openingDate": "2021-01-01",
+    "withdrawalLimit": 1000,
+    "userId": "30ab2214-d1cf-4d11-af5f-39596ad47524"
+}
+```
+
+**Buscar Detalhes da Conta Bancária**
+```http
+GET /account/:id
+```
+Exemplo de requisição:
+```http
+GET /account/30ab2214-d1cf-4d11-af5f-39596ad47524
+```
+
+**Excluir Conta Bancária**
+```http
+DELETE /account/:id
+```
+Exemplo de requisição:
+```http
+DELETE /account/30ab2214-d1cf-4d11-af5f-39596ad47524
+```
+
+### Usuários
+
+**Criar Usuário**
+```http
+POST /user/create
+```
+Exemplo de requisição:
+```json
+{
+    "name": "João da Silva",
+    "cpf": "12345678901"
+}
+```
+
+**Buscar Detalhes do Usuário**
+```http
+GET /user/:id
+```
+Exemplo de requisição:
+```http
+GET /user/30ab2214-d1cf-4d11-af5f-39596ad47524
+```
+
+**Listar Todos os Usuários**
+```http
+GET /user
+```
+Exemplo de requisição:
+```http
+GET /user
+```
+Exemplo de resposta:
+```json
+[
+    {
+        "id": "30ab2214-d1cf-4d11-af5f-39596ad47524",
+        "name": "João da Silva",
+        "cpf": "12345678901",
+        "created_at": "2021-01-01T00:00:00.000Z"
+    }
+]
+```
+
+**Excluir Usuário**
+```http
+DELETE /user/:id
+```
+Exemplo de requisição:
+```http
+DELETE /user/30ab2214-d1cf-4d11-af5f-39596ad47524
+```
+
+### Transações
+
+**Realizar Depósito**
+```http
+POST /deposit
+```
+Exemplo de requisição:
+```json
+{
+    "id": "30ab2214-d1cf-4d11-af5f-39596ad47524",
+    "amount": 1000
+}
+```
+
+**Realizar Saque**
+```http
+POST /withdraw
+```
+Exemplo de requisição:
+```json
+{
+    "id": "30ab2214-d1cf-4d11-af5f-39596ad47524",
+    "amount": 1000
+}
+```
+
+**Realizar Transferência**
+```http
+POST /transfer
+```
+Exemplo de requisição:
+```json
+{
+    "id": "30ab2214-d1cf-4d11-af5f-39596ad47524",
+    "amount": 1000,
+    "accountNumber": "123456"
+}
+```
+
 
 ## Como Usar
 
