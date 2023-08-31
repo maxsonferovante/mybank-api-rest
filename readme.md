@@ -158,10 +158,10 @@ Exemplo de requisição:
 
 **Buscar Detalhes da Conta Bancária**
 
-![GET /account/:id](prints/get_account.png.png)
+![GET /account/:id](prints/get_account.png)
 
 
-**Buscar Detalhes do Usuário**
+**Buscar Detalhes dos Usuários**
 
 ![GET /user/:id](prints/get_user.png)
 ## Padrão de Design
