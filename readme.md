@@ -23,14 +23,6 @@ Esta é uma API para um banco digital que permite a gestão de contas bancárias
 4. Transferências: Transferências de fundos entre contas.
 5. Consulta de Saldo: Verificação dos saldos das contas.
 
-## Padrão de Design
-
-O projeto segue os princípios SOLID, promovendo a criação de código modular, coeso e de fácil manutenção. O código está organizado em pastas por responsabilidade, incluindo entidades, casos de uso, repositórios e rotas.
-
-Para a interação com o banco de dados, foi implementado o padrão Repository usando o Prisma. As interfaces de repositório estabelecem contratos de comunicação com o banco de dados, enquanto as implementações concretas no diretório 'repositories/implementations' encapsulam a lógica de acesso.
-
-Este projeto serve como um exemplo de como construir uma API de banco digital seguindo boas práticas de desenvolvimento e design.
-
 ## Rotas da API
 
 ### Contas Bancárias
@@ -162,6 +154,23 @@ Exemplo de requisição:
 }
 ```
 
+## Exemplos de Uso - Screenshot 
+
+**Buscar Detalhes da Conta Bancária**
+
+![GET /account/:id](prints/get_account.png.png)
+
+
+**Buscar Detalhes do Usuário**
+
+![GET /user/:id](prints/get_user.png)
+## Padrão de Design
+
+O projeto segue os princípios SOLID, promovendo a criação de código modular, coeso e de fácil manutenção. O código está organizado em pastas por responsabilidade, incluindo entidades, casos de uso, repositórios e rotas.
+
+Para a interação com o banco de dados, foi implementado o padrão Repository usando o Prisma. As interfaces de repositório estabelecem contratos de comunicação com o banco de dados, enquanto as implementações concretas no diretório 'repositories/implementations' encapsulam a lógica de acesso.
+
+Este projeto serve como um exemplo de como construir uma API de banco digital seguindo boas práticas de desenvolvimento e design.
 
 ## Explicação de Pastas e Arquivos
 
@@ -199,7 +208,7 @@ Essa estrutura enfatiza a separação das responsabilidades e a organização po
 2. Instale as dependências com `npm install`.
 3. Configure o arquivo 'prisma/schema.prisma' de acordo com suas necessidades.
 4. Execute `npx prisma migrate dev` para aplicar as migrações.
-5. Inicie o servidor com `npm start`.
+5. Inicie o servidor com `npm run dev`.
 
 ---
 
