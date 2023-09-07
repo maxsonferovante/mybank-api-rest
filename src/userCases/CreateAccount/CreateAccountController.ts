@@ -8,11 +8,18 @@ export class CreateAccountController {
     ) { }
 
     async handle(request: Request, response: Response): Promise<Response> {
-        const { id, userId, accountNumber, balance, accountType, agency, bankNumber, openingDate, withdrawalLimit } = request.body;
-
+        const {
+            accountNumber,
+            balance,
+            accountType,
+            agency,
+            bankNumber,
+            openingDate,
+            withdrawalLimit,
+            userId
+        } = request.body;
         try {
             await this.createAccountUseCase.execute({
-                id,
                 userId,
                 accountNumber,
                 balance,
@@ -22,11 +29,10 @@ export class CreateAccountController {
                 openingDate,
                 withdrawalLimit,
             });
-
             return response.status(201).send();
         } catch (error) {
             return response.status(400).json({
-                message: error || 'Unexpected error.'
+                message: 'Fail to create account.'
             })
         }
     }

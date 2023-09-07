@@ -10,7 +10,6 @@ export class CreateUserController {
 
     async handle(request: Request, response: Response): Promise<Response> {
         const { name, individualRegistration } = request.body;
-
         try {
             await this.createUserUseCase.execute({
                 name,
@@ -18,9 +17,7 @@ export class CreateUserController {
             });
             return response.status(201).send();
         } catch (error) {
-            return response.status(400).json({
-                message: error || 'Unexpected error.'
-            })
+            return response.status(400).json({ message: error || 'Unexpected error.' })
         }
     }
 }

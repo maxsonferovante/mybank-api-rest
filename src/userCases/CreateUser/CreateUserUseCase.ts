@@ -8,12 +8,14 @@ export class CreateUserUseCase {
     ) { }
 
     async execute(data: CreateUserDTO) {
+        try {
 
-        const userAlreadyExists = await this.userRepository.findByIndividualRegistration(data.individualRegistration);
-        if (userAlreadyExists) {
-            throw new Error('User already exists');
+            const user = new UserModel(Object.assign(data));
+            await this.userRepository.save(user);
         }
-        const user = new UserModel(Object.assign(data));
-        await this.userRepository.save(user);
+        catch (error) {
+            throw new Error("Failed to create user");
+        }
+
     }
 }

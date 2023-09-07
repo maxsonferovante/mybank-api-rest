@@ -1,5 +1,4 @@
 export interface CreateAccountDTO {
-    id: string;
     userId: string;
     accountNumber: string;
     balance: number;

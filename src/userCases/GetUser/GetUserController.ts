@@ -14,7 +14,7 @@ export class GetUserController {
             return response.status(200).json(user);
         } catch (error) {
             return response.status(400).json({
-                message: error || 'Unexpected error.'
+                message: "User not found."
             })
         }
     }

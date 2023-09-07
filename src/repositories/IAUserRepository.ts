@@ -1,8 +1,9 @@
 import { User } from "../entities/User";
+import { GetUserDTO } from "../userCases/GetUser/GetUserDTO";
 
 
 export interface IAUserRepository {
-    findById(id: string): Promise<User>;
+    findById(data: GetUserDTO): Promise<User>;
     findByIndividualRegistration(individualRegistration: string): Promise<User>;
     save(user: User): Promise<void>;
     delete(id: string): Promise<void>;

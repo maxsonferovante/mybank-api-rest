@@ -1,6 +1,7 @@
 import { IAccountRepository } from "../IAccountRepository";
 import { PrismaClient } from "@prisma/client";
 import { Account, AccountModel } from "../../entities/Account";
+import { cp } from "fs";
 
 
 const prisma = new PrismaClient();
@@ -10,19 +11,28 @@ export class PostgresAccountRepository implements IAccountRepository {
     private accounts: Account[] = [];
 
     async save(account: AccountModel): Promise<void> {
-        await prisma.account.create({
-            data: {
-                id: account.id,
-                accountNumber: account.accountNumber,
-                balance: account.balance,
-                accountType: account.accountType,
-                agency: account.agency,
-                bankNumber: account.bankNumber,
-                openingDate: account.openingDate,
-                withdrawalLimit: account.withdrawalLimit,
-                userId: account.userId
-            }
-        });
+        console.log(account);
+        try {
+            await prisma.account.create({
+                data: {
+                    id: account.id,
+                    accountNumber: account.accountNumber,
+                    balance: account.balance,
+                    accountType: account.accountType,
+                    agency: account.agency,
+                    bankNumber: account.bankNumber,
+                    openingDate: account.openingDate,
+                    withdrawalLimit: account.withdrawalLimit,
+                    userId: account.userId
+
+                },
+            });
+        }
+        catch (err) {
+            console.log(err);
+            throw new Error('An error occurred while fetching the account.');
+        }
+
     }
     async delete(id: string): Promise<void> {
         await prisma.account.delete({

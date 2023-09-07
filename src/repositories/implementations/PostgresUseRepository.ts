@@ -1,6 +1,8 @@
 import { IAUserRepository } from "../IAUserRepository";
 import { UserModel, User } from "../../entities/User";
 import { PrismaClient } from "@prisma/client";
+import { log } from "console";
+import { GetUserDTO } from "../../userCases/GetUser/GetUserDTO";
 
 
 
@@ -41,11 +43,11 @@ export class PostgresUserRepository implements IAUserRepository {
             user => new UserModel(user)
         );
     }
-    async findById(id: string): Promise<User> {
+    async findById(data: GetUserDTO): Promise<User> {
         try {
             const user = await prisma.user.findUnique({
                 where: {
-                    id: id
+                    id: data.id
                 }
             });
             if (!user) {
@@ -58,7 +60,7 @@ export class PostgresUserRepository implements IAUserRepository {
     }
 
     async findByIndividualRegistration(individualRegistration: string): Promise<User> {
-
+        console.log(individualRegistration);
         try {
             const user = await prisma.user.findFirstOrThrow({
                 where: {

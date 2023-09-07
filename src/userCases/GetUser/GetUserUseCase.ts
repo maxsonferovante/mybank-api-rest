@@ -9,7 +9,7 @@ export class GetUserUseCase {
     ) { }
 
     async execute(data: GetUserDTO) {
-        const user = await this.userRepository.findById(data.id);
+        const user = await this.userRepository.findById(data);
         if (!user) {
             throw new Error('User not found');
         }

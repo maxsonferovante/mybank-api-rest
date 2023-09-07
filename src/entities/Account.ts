@@ -44,6 +44,7 @@ export class AccountModel implements Account {
 
         if (!id) {
             this.id = uuid();
+
         }
 
         if (!openingDate) {
