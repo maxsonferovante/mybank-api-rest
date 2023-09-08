@@ -41,15 +41,8 @@ export class AccountModel implements Account {
 
     constructor(props: Omit<Account, 'id' | 'openingDate'>, id?: string, openingDate?: Date) {
         Object.assign(this, props);
+        this.openingDate = openingDate || new Date();
 
-        if (!id) {
-            this.id = uuid();
-
-        }
-
-        if (!openingDate) {
-            this.openingDate = new Date();
-        }
     }
 }
 

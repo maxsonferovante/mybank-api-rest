@@ -75,4 +75,17 @@ export class PostgresUserRepository implements IAUserRepository {
             throw new Error("User not found.");
         }
     }
+    async exists(id: string): Promise<boolean> {
+        console.log(id);
+        const user = await prisma.user.findFirst({
+            where: {
+                id: id
+            }
+        });
+        console.log(user);
+        if (!user) {
+            return false;
+        }
+        return true;
+    }
 }

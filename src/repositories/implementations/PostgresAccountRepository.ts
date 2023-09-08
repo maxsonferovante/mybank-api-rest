@@ -11,7 +11,6 @@ export class PostgresAccountRepository implements IAccountRepository {
     private accounts: Account[] = [];
 
     async save(account: AccountModel): Promise<void> {
-        console.log(account);
         try {
             await prisma.account.create({
                 data: {

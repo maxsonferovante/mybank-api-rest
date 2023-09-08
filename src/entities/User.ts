@@ -18,9 +18,5 @@ export class UserModel implements User {
 
     constructor(props: Omit<User, 'id'>, id?: string) {
         Object.assign(this, props);
-
-        if (!id) {
-            this.id = uuid();
-        }
     }
 }

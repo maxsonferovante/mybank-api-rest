@@ -14,4 +14,11 @@ export class GetAccountUseCase {
         }
         return new AccountModel(account);
     }
+    async executeList() {
+        const accounts = await this.accountRepository.list();
+        if (!accounts) {
+            throw new Error('Account not found');
+        }
+        return accounts.map(account => new AccountModel(account));
+    }
 }

@@ -24,11 +24,13 @@ accountRoutes.get('/account/:id', (request, response) => {
 });
 
 
-
 accountRoutes.delete('/account/:id', (request, response) => {
     return deleteAccountController.handle(request, response);
 });
 
+accountRoutes.get('/account', (request, response) => {
+    return getAccountController.handleList(request, response);
+});
 
 accountRoutes.post('/user/create', (request, response) => {
     return createUserController.handle(request, response);

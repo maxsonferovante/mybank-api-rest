@@ -19,5 +19,14 @@ export class GetAccountController {
             })
         }
     }
-
+    async handleList(request: Request, response: Response): Promise<Response> {
+        try {
+            const accounts = await this.getAccountUseCase.executeList();
+            return response.status(200).json(accounts);
+        } catch (error) {
+            return response.status(400).json({
+                message: error || 'Unexpected error.'
+            })
+        }
+    }
 }
