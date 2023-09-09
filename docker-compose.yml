@@ -1,0 +1,25 @@
+version: '3.9'
+
+services:
+  postgres:
+    container_name: postgres-mybank
+    image: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+
+  node:
+    build: .
+    command: "npm run start"
+    container_name: node-mybank-api
+    working_dir: /app
+    expose:
+      - "3000"
+    ports:
+      - "3000:3000"
